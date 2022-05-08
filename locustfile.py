@@ -26,6 +26,29 @@ class FdnTest(HttpUser):
     #             response.failure("Did not get expected value in greeting")
 
 
+    # @task
+    # def predefined(self):
+    #      self.client.get('https://api.femaledaily.com/app/v2/user/predefined')
+
+
     @task
-    def predefined(self):
-         self.client.get('https://api.femaledaily.com/app/v2/user/predefined')
+    def check_mpc_id(self):
+        with self.client.post(
+            'http://api-dev.femaledaily.net/app/v1/allo/member/user-profile-mpc-bypass',
+            json={"mdcId": "000201000017245911"},
+            catch_response=True
+        ) as response:
+            datas = response.json()
+            print(datas)
+
+    @task
+    def check_reliable_db_with_query(self):
+        with self.client.post(
+            'allo/member/stress-test',
+            json={"mdcId": "000201000017245911"},
+            catch_response=True
+        ) as response:
+            datas = response.json()
+            print(datas)
+    
+    
