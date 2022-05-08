@@ -44,7 +44,7 @@ class FdnTest(HttpUser):
     @task
     def check_reliable_db_with_query(self):
         with self.client.post(
-            'allo/member/stress-test',
+            'http://api-dev.femaledaily.net/app/v1/allo/member/stress-test',
             json={"mdcId": "000201000017245911"},
             catch_response=True
         ) as response:
